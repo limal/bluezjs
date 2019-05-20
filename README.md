@@ -18,7 +18,7 @@ yarn add bluezjs
 
 Running an ExpressJS server that initiates a scan for nearby Bluetooth LE devices.
 
-```
+```javascript
 const bluezjs = require("bluezjs");
 const express = require("express");
 
