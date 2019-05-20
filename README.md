@@ -48,11 +48,11 @@ Bluezjs is using the newest D-Bus library [dbus-next](https://github.com/acrisci
 
 The most popular BLE (central mode) library for NodeJS is [noble](https://github.com/noble/noble). It's great but it has its limiations. Below is a table that shows differences between bluezjs and noble.
 
-| Feature                 | noble   | bluezjs |
-| ----------------------- | ------- | ------- |
-| **NodeJS 10.x**         | No      | **Yes** |
-| **D-Bus (more stable)** | No      | **Yes** |
-| **Raspberry Pi**        | **Yes** | **Yes** |
-| **Peripheral mode**     | No      | No      |
-| **MacOS**               | **Yes** | No      |
-| **Windows**             | **Yes** | No      |
+| Feature             | noble   | bluezjs |
+| ------------------- | ------- | ------- |
+| NodeJS 10 and later | No      | **Yes** |
+| D-Bus (more stable) | No      | **Yes** |
+| Raspberry Pi        | **Yes** | **Yes** |
+| Peripheral mode     | No      | No      |
+| MacOS               | **Yes** | No      |
+| Windows             | **Yes** | No      |
