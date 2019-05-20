@@ -1,0 +1,20 @@
+{
+  "name": "bluezjs",
+  "version": "0.1.0",
+  "description": "BlueZ over D-Bus for NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limal/bluezjs.git"
+  },
+  "keywords": [],
+  "author": "Lukasz Wolnik <npmjs@wb-lock.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/limal/bluezjs/issues"
+  },
+  "homepage": "https://github.com/limal/bluezjs#readme"
+}
