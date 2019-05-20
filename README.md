@@ -1,2 +1,1 @@
-# bluezjs
-BlueZ over D-Bus for NodeJS
+![bluezjs logo](bluezjs-logo.png?raw=true "bluezjs logo")
