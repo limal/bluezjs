@@ -1,9 +1,5 @@
-const impl = require("src/bluezjs");
-
-const bluezjs = {
-  ...impl
-};
+const bluez = require("./src/bluez.js");
 
 module.exports = {
-  bluezjs
+  ...bluez
 };

@@ -1,6 +1,8 @@
 let dbus = require("dbus-next");
 let bus;
 let adapter1;
+let scanningPromiseResolve;
+const HCI0_PATH = "/org/bluez/hci0";
 
 const init = async () => {
   bus = dbus.systemBus();
@@ -15,27 +17,57 @@ const listAll = async () => {
   return await interface.GetManagedObjects();
 };
 
-const readValue = async charPath => {
-  let bus = dbus.systemBus();
-  let device = await bus.getProxyObject("org.bluez", charPath);
-  let wblock = await device.getInterface("org.bluez.GattCharacteristic1");
-  let options = new Object();
+const connect = async devicePath => {
+  let deviceObject = await bus.getProxyObject("org.bluez", devicePath);
+  let device = await deviceObject.getInterface("org.bluez.Device1");
 
-  let result = await wblock.ReadValue(options);
-  return result;
+  await device.Connect();
 };
 
-const writeValue = async charPath => {
-  let bus = dbus.systemBus();
-  let device = await bus.getProxyObject("org.bluez", charPath);
-  let wblock = await device.getInterface("org.bluez.GattCharacteristic1");
+const disconnect = async devicePath => {
+  let deviceObject = await bus.getProxyObject("org.bluez", devicePath);
+  let device = await deviceObject.getInterface("org.bluez.Device1");
 
-  return await wblock.WriteValue([73, 77, 76, 69, 71, 73, 84], new Object());
+  device.Disconnect();
+};
+
+const readValue = async charPath => {
+  let deviceObject = await bus.getProxyObject("org.bluez", charPath);
+  let device = await deviceObject.getInterface("org.bluez.GattCharacteristic1");
+  let options = new Object();
+
+  return await device.ReadValue(options);
+};
+
+const startDiscovery = async () =>
+  new Promise(async resolve => {
+    scanningPromiseResolve = resolve;
+    await adapter1.StartDiscovery();
+  });
+
+const stopDiscovery = () => {
+  if (scanningPromiseResolve) {
+    scanningPromiseResolve();
+  }
+
+  adapter1.StopDiscovery();
+};
+
+const writeValue = async (charPath, message) => {
+  let bus = dbus.systemBus();
+  let deviceObject = await bus.getProxyObject("org.bluez", charPath);
+  let device = await deviceObject.getInterface("org.bluez.GattCharacteristic1");
+
+  return await device.WriteValue([...Buffer.from(message)], new Object());
 };
 
 module.exports = {
   init,
+  connect,
+  disconnect,
   listAll,
   readValue,
+  startDiscovery,
+  stopDiscovery,
   writeValue
 };
